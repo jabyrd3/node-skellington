@@ -1,0 +1,14 @@
+#! /bin/sh
+
+if [[ -f /app.tar.gz ]]; then
+  mkdir -p /app
+  tar -xzf /app.tar.gz
+  rm /app.tar.gz
+fi;
+
+if [[ -f /node.xz ]]; then
+  tar xf /node.xz
+  cp node-v15.9.0-linux-x64-musl/bin/node /sbin/node
+  rm -rf /node*
+fi;
+exec node /app/index.mjs
