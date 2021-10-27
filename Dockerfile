@@ -3,8 +3,7 @@ WORKDIR /app
 COPY package.json /app/package.json
 # we need upx to compress nodejs binary, we strip it at the end
 # we need npm to install deps, we strip it at the end
-# nodejs openssh-keygen openssl and gnupg are needed at runtime
-# its dumb to manually strip the bullshit out of these, i need to find a better way
+# nodejs is needed at runtime, we compress it with upx
 RUN apk update && apk add nodejs npm upx \
   && npm install --production \
   && rm -rf /app/package-lock.json \
